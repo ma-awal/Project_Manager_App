@@ -1,4 +1,108 @@
 import React, { useState, useEffect } from 'react';
+const defaultProjects = [
+  // --- To-Do ---
+  {
+    id: 1,
+    title: 'Database Schema Design',
+    description:
+      'Define MongoDB collections for users, products, and orders with proper relationships.',
+    category: 'To-Do',
+    date: '28/12/2025',
+  },
+  {
+    id: 2,
+    title: 'Authentication Setup',
+    description:
+      'Implement secure login/signup flows using Firebase Auth or NextAuth.',
+    category: 'To-Do',
+    date: '29/12/2025',
+  },
+  {
+    id: 3,
+    title: 'Dark Mode Toggle',
+    description:
+      'Add system preference detection and manual toggle for light/dark themes.',
+    category: 'To-Do',
+    date: '30/12/2025',
+  },
+
+  // --- In Progress ---
+  {
+    id: 4,
+    title: 'API Integration',
+    description:
+      'Fetch real-time data using Axios and handle loading states for the dashboard.',
+    category: 'In Progress',
+    date: '26/12/2025',
+  },
+  {
+    id: 5,
+    title: 'Responsive Navbar',
+    description:
+      'Fix hamburger menu animation and layout issues on mobile devices.',
+    category: 'In Progress',
+    date: '26/12/2025',
+  },
+  {
+    id: 6,
+    title: 'Hero Section Animation',
+    description: 'Implement smooth entrance animations using Framer Motion.',
+    category: 'In Progress',
+    date: '27/12/2025',
+  },
+
+  // --- Revise ---
+  {
+    id: 7,
+    title: 'Fix Z-Index Issue',
+    description:
+      'Modal is appearing behind the navbar on specific screens. Need to adjust stacking context.',
+    category: 'Revise',
+    date: '24/12/2025',
+  },
+  {
+    id: 8,
+    title: 'Optimize Images',
+    description:
+      'Lighthouse score is low due to large PNG files. Convert all assets to WebP format.',
+    category: 'Revise',
+    date: '23/12/2025',
+  },
+  {
+    id: 9,
+    title: 'Refactor Context API',
+    description:
+      'State management logic is getting messy, need to split global context into smaller parts.',
+    category: 'Revise',
+    date: '22/12/2025',
+  },
+
+  // --- Done ---
+  {
+    id: 10,
+    title: 'Initial Project Setup',
+    description:
+      'Created Vite project, installed Tailwind CSS, and configured ESLint/Prettier.',
+    category: 'Done',
+    date: '20/12/2025',
+  },
+  {
+    id: 11,
+    title: 'Figma UI Design',
+    description:
+      'Completed all wireframes and high-fidelity prototypes for the application.',
+    category: 'Done',
+    date: '18/12/2025',
+  },
+  {
+    id: 12,
+    title: 'GitHub Repo Setup',
+    description:
+      'Initialized Git, added .gitignore, and pushed the initial commit to the main branch.',
+    category: 'Done',
+    date: '15/12/2025',
+  },
+];
 
 // আইকন কম্পোনেন্টস (যাতে আলাদা লাইব্রেরি ইন্সটল না করতে হয়)
 const PlusIcon = () => (
@@ -86,10 +190,10 @@ function TaskManager() {
   // --- স্টেটস (State) ---
   const categories = ['To-Do', 'In Progress', 'Revise', 'Done'];
 
-  // ১. লোকাল স্টোরেজ থেকে ডাটা লোড করা
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('myTasks');
-    return savedTasks ? JSON.parse(savedTasks) : [];
+    // যদি লোকাল স্টোরেজে ডাটা থাকে তবে সেটা নিবে, নাহলে উপরের defaultProjects দেখাবে
+    return savedTasks ? JSON.parse(savedTasks) : defaultProjects;
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
